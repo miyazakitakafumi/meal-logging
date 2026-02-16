@@ -1,6 +1,12 @@
-# React + TypeScript + Vite
+# 献立記録アプリ (Meal Logging)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+毎日の食事を記録・管理するWebアプリケーション
+
+## Tech Stack
+
+- React + TypeScript + Vite
+- Tailwind CSS v4
+- Supabase
 
 Currently, two official plugins are available:
 
