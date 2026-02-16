@@ -89,7 +89,7 @@ function App() {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 py-8">
         <header className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">献立記録アプリ</h1>
+          <h1 className="text-3xl font-bold text-gray-900">🍽️ 献立記録アプリ</h1>
           <p className="text-gray-600 mt-2">毎日の食事を記録しましょう</p>
         </header>
 
