@@ -1,7 +1,7 @@
 import type { Meal } from '../types'
 import MealCard from './MealCard'
 
-interface MealListProps {
+type MealListProps = {
   meals: Meal[]
   onEdit: (meal: Meal) => void
   onDelete: (id: string) => void

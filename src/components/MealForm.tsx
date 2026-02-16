@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import type { Meal, MealType } from '../types'
 
-interface MealFormProps {
+type MealFormProps = {
   onSubmit: (data: { meal_name: string; meal_date: string; meal_type: MealType }) => void
   editingMeal?: Meal | null
   onCancel?: () => void
