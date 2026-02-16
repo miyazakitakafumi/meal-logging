@@ -7,7 +7,7 @@ interface MealListProps {
   onDelete: (id: string) => void
 }
 
-export default function MealList({ meals, onEdit, onDelete }: MealListProps) {
+const MealList = ({ meals, onEdit, onDelete }: MealListProps) => {
   if (meals.length === 0) {
     return (
       <div className="text-center py-12 bg-white rounded-lg shadow">
@@ -62,3 +62,5 @@ export default function MealList({ meals, onEdit, onDelete }: MealListProps) {
     </div>
   )
 }
+
+export default MealList

@@ -4,7 +4,7 @@ import type { Meal, MealType } from './types'
 import MealForm from './components/MealForm'
 import MealList from './components/MealList'
 
-function App() {
+const App = () => {
   const [meals, setMeals] = useState<Meal[]>([])
   const [editingMeal, setEditingMeal] = useState<Meal | null>(null)
   const [loading, setLoading] = useState(true)

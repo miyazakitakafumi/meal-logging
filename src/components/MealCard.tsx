@@ -6,7 +6,7 @@ interface MealCardProps {
   onDelete: (id: string) => void
 }
 
-export default function MealCard({ meal, onEdit, onDelete }: MealCardProps) {
+const MealCard = ({ meal, onEdit, onDelete }: MealCardProps) => {
   const getMealTypeColor = (type: string) => {
     switch (type) {
       case '朝食':
@@ -58,3 +58,5 @@ export default function MealCard({ meal, onEdit, onDelete }: MealCardProps) {
     </div>
   )
 }
+
+export default MealCard

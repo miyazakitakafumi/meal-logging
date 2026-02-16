@@ -7,7 +7,7 @@ interface MealFormProps {
   onCancel?: () => void
 }
 
-export default function MealForm({ onSubmit, editingMeal, onCancel }: MealFormProps) {
+const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
   const [mealName, setMealName] = useState('')
   const [mealDate, setMealDate] = useState('')
   const [mealType, setMealType] = useState<MealType>('昼食')
@@ -114,3 +114,5 @@ export default function MealForm({ onSubmit, editingMeal, onCancel }: MealFormPr
     </form>
   )
 }
+
+export default MealForm
