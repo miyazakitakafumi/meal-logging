@@ -36,7 +36,7 @@ const App = () => {
   }
 
   // 献立を追加
-  const handleAddMeal = async (data: { meal_name: string; meal_date: string; meal_type: MealType }) => {
+  const handleAddMeal = async (data: { meal_name: string; meal_date: string; meal_type: MealType; rank: number }) => {
     try {
       const { error } = await supabase
         .from('meals')
@@ -51,7 +51,7 @@ const App = () => {
   }
 
   // 献立を更新
-  const handleUpdateMeal = async (data: { meal_name: string; meal_date: string; meal_type: MealType }) => {
+  const handleUpdateMeal = async (data: { meal_name: string; meal_date: string; meal_type: MealType; rank: number }) => {
     if (!editingMeal) return
 
     try {

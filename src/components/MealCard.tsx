@@ -29,13 +29,22 @@ const MealCard = ({ meal, onEdit, onDelete }: MealCardProps) => {
         </span>
       </div>
       
-      <p className="text-sm text-gray-600 mb-3">
+      <p className="text-sm text-gray-600 mb-2">
         {new Date(meal.meal_date).toLocaleDateString('ja-JP', {
           year: 'numeric',
           month: 'long',
           day: 'numeric',
         })}
       </p>
+
+      <div className="flex items-center gap-1 mb-3">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <span key={star} className="text-lg">
+            {star <= meal.rank ? '⭐' : '☆'}
+          </span>
+        ))}
+        <span className="text-xs text-gray-500 ml-1">({meal.rank}/5)</span>
+      </div>
 
       <div className="flex gap-2">
         <button
