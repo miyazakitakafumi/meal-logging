@@ -46,14 +46,14 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md mb-6">
-      <h2 className="text-xl font-bold mb-4">
+    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-sm mb-6 border border-stone-200">
+      <h2 className="text-xl font-bold mb-4 text-stone-700">
         {editingMeal ? '献立を編集' : '献立を登録'}
       </h2>
       
       <div className="space-y-4">
         <div>
-          <label htmlFor="mealName" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="mealName" className="block text-sm font-medium text-stone-600 mb-1">
             料理名
           </label>
           <input
@@ -61,14 +61,14 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
             id="mealName"
             value={mealName}
             onChange={(e) => setMealName(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-stone-200 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400 bg-white"
             placeholder="例: カレーライス"
             required
           />
         </div>
 
         <div>
-          <label htmlFor="mealDate" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="mealDate" className="block text-sm font-medium text-stone-600 mb-1">
             日付
           </label>
           <input
@@ -76,20 +76,20 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
             id="mealDate"
             value={mealDate}
             onChange={(e) => setMealDate(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-stone-200 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400 bg-white"
             required
           />
         </div>
 
         <div>
-          <label htmlFor="mealType" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="mealType" className="block text-sm font-medium text-stone-600 mb-1">
             食事の種類
           </label>
           <select
             id="mealType"
             value={mealType}
             onChange={(e) => setMealType(e.target.value as MealType)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-stone-200 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400 bg-white"
           >
             <option value="朝食">朝食</option>
             <option value="昼食">昼食</option>
@@ -98,7 +98,7 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
         </div>
 
         <div>
-          <label htmlFor="rank" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="rank" className="block text-sm font-medium text-stone-600 mb-1">
             評価 (1-5)
           </label>
           <div className="flex items-center gap-2">
@@ -112,14 +112,14 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
                 {star <= rank ? '⭐' : '☆'}
               </button>
             ))}
-            <span className="text-sm text-gray-600 ml-2">({rank}/5)</span>
+            <span className="text-sm text-stone-500 ml-2">({rank}/5)</span>
           </div>
         </div>
 
         <div className="flex gap-2">
           <button
             type="submit"
-            className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors font-medium"
+            className="flex-1 bg-amber-200 text-amber-800 px-4 py-2 rounded-md hover:bg-amber-300 transition-colors font-medium"
           >
             {editingMeal ? '更新' : '登録'}
           </button>
@@ -127,7 +127,7 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
             <button
               type="button"
               onClick={onCancel}
-              className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+              className="px-4 py-2 border border-stone-200 rounded-md hover:bg-stone-50 transition-colors"
             >
               キャンセル
             </button>
