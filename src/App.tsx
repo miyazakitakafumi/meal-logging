@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { supabase } from './lib/supabaseClient'
 import type { Meal, MealType } from './types'
 import MealForm from './components/MealForm'
@@ -11,11 +11,7 @@ const App = () => {
   const [error, setError] = useState<string | null>(null)
 
   // 献立を取得
-  useEffect(() => {
-    fetchMeals()
-  }, [])
-
-  const fetchMeals = async () => {
+  const fetchMeals = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
@@ -33,7 +29,11 @@ const App = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
+
+  useEffect(() => {
+    fetchMeals()
+  }, [fetchMeals])
 
   // 献立を追加
   const handleAddMeal = async (data: { meal_name: string; meal_date: string; meal_type: MealType }) => {
