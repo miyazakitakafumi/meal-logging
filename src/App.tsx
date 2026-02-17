@@ -37,6 +37,32 @@ const App = () => {
     }
   }
 
+  const renderContent = () => {
+    if (loading) {
+      return (
+        <div className="text-center py-12">
+          <p className="text-stone-400">読み込み中...</p>
+        </div>
+      )
+    }
+
+    if (error) {
+      return (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+          {error}
+        </div>
+      )
+    }
+
+    return (
+      <MealList
+        meals={meals}
+        onEdit={setEditingMeal}
+        onDelete={handleDeleteMeal}
+      />
+    )
+  }
+
   return (
     <div className="min-h-screen bg-stone-100">
       <div className="max-w-6xl mx-auto px-4 py-8">
@@ -51,21 +77,7 @@ const App = () => {
           onCancel={() => setEditingMeal(null)}
         />
 
-        {loading ? (
-          <div className="text-center py-12">
-            <p className="text-stone-400">読み込み中...</p>
-          </div>
-        ) : error ? (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-            {error}
-          </div>
-        ) : (
-          <MealList
-            meals={meals}
-            onEdit={setEditingMeal}
-            onDelete={handleDeleteMeal}
-          />
-        )}
+        {renderContent()}
       </div>
     </div>
   )
