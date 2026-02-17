@@ -1,8 +1,10 @@
 import { useState, useEffect, useCallback } from 'react'
-import { supabase } from './lib/supabaseClient'
 import type { Meal, MealFormData } from './types'
+import { createMealRepository } from './repositories/mealRepository'
 import MealForm from './components/MealForm'
 import MealList from './components/MealList'
+
+const mealRepository = createMealRepository()
 
 const App = () => {
   const [meals, setMeals] = useState<Meal[]>([])
@@ -15,17 +17,11 @@ const App = () => {
     try {
       setLoading(true)
       setError(null)
-      const { data, error } = await supabase
-        .from('meals')
-        .select('*')
-        .order('meal_date', { ascending: false })
-        .order('created_at', { ascending: false })
-
-      if (error) throw error
-      setMeals(data || [])
+      const data = await mealRepository.findAll()
+      setMeals(data)
     } catch (err) {
       console.error('Error fetching meals:', err)
-      setError('献立の取得に失敗しました')
+      setError(err instanceof Error ? err.message : '献立の取得に失敗しました')
     } finally {
       setLoading(false)
     }
@@ -38,15 +34,11 @@ const App = () => {
   // 献立を追加
   const handleAddMeal = async (data: MealFormData) => {
     try {
-      const { error } = await supabase
-        .from('meals')
-        .insert([data])
-
-      if (error) throw error
+      await mealRepository.create(data)
       await fetchMeals()
     } catch (err) {
       console.error('Error adding meal:', err)
-      alert('献立の登録に失敗しました')
+      alert(err instanceof Error ? err.message : '献立の登録に失敗しました')
     }
   }
 
@@ -55,33 +47,23 @@ const App = () => {
     if (!editingMeal) return
 
     try {
-      const { error } = await supabase
-        .from('meals')
-        .update(data)
-        .eq('id', editingMeal.id)
-
-      if (error) throw error
+      await mealRepository.update(editingMeal.id, data)
       await fetchMeals()
       setEditingMeal(null)
     } catch (err) {
       console.error('Error updating meal:', err)
-      alert('献立の更新に失敗しました')
+      alert(err instanceof Error ? err.message : '献立の更新に失敗しました')
     }
   }
 
   // 献立を削除
   const handleDeleteMeal = async (id: string) => {
     try {
-      const { error } = await supabase
-        .from('meals')
-        .delete()
-        .eq('id', id)
-
-      if (error) throw error
+      await mealRepository.delete(id)
       await fetchMeals()
     } catch (err) {
       console.error('Error deleting meal:', err)
-      alert('献立の削除に失敗しました')
+      alert(err instanceof Error ? err.message : '献立の削除に失敗しました')
     }
   }
 

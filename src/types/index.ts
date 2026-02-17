@@ -15,3 +15,10 @@ export type MealFormData = {
   meal_type: MealType
   rank: number
 }
+
+export type MealRepository = {
+  findAll: () => Promise<Meal[]>
+  create: (meal: MealFormData) => Promise<void>
+  update: (id: string, meal: MealFormData) => Promise<void>
+  delete: (id: string) => Promise<void>
+}
