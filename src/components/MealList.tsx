@@ -10,9 +10,9 @@ type MealListProps = {
 const MealList = ({ meals, onEdit, onDelete }: MealListProps) => {
   if (meals.length === 0) {
     return (
-      <div className="text-center py-12 bg-white rounded-lg shadow">
-        <p className="text-gray-500">まだ献立が登録されていません</p>
-        <p className="text-sm text-gray-400 mt-2">上のフォームから献立を登録してください</p>
+      <div className="text-center py-12 bg-white rounded-lg shadow-sm border border-stone-200">
+        <p className="text-stone-400">まだ献立が登録されていません</p>
+        <p className="text-sm text-stone-300 mt-2">上のフォームから献立を登録してください</p>
       </div>
     )
   }
@@ -34,7 +34,7 @@ const MealList = ({ meals, onEdit, onDelete }: MealListProps) => {
     <div className="space-y-6">
       {sortedDates.map((date) => (
         <div key={date}>
-          <h3 className="text-lg font-semibold text-gray-700 mb-3">
+          <h3 className="text-lg font-semibold text-stone-600 mb-3">
             {new Date(date).toLocaleDateString('ja-JP', {
               year: 'numeric',
               month: 'long',

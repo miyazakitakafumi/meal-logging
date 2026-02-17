@@ -21,15 +21,15 @@ const MealCard = ({ meal, onEdit, onDelete }: MealCardProps) => {
   }
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow">
+    <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-stone-200">
       <div className="flex justify-between items-start mb-2">
-        <h3 className="text-lg font-semibold text-gray-900">{meal.meal_name}</h3>
+        <h3 className="text-lg font-semibold text-stone-700">{meal.meal_name}</h3>
         <span className={`px-2 py-1 rounded text-xs font-medium ${getMealTypeColor(meal.meal_type)}`}>
           {meal.meal_type}
         </span>
       </div>
       
-      <p className="text-sm text-gray-600 mb-2">
+      <p className="text-sm text-stone-500 mb-2">
         {new Date(meal.meal_date).toLocaleDateString('ja-JP', {
           year: 'numeric',
           month: 'long',
@@ -43,13 +43,13 @@ const MealCard = ({ meal, onEdit, onDelete }: MealCardProps) => {
             {star <= meal.rank ? '⭐' : '☆'}
           </span>
         ))}
-        <span className="text-xs text-gray-500 ml-1">({meal.rank}/5)</span>
+        <span className="text-xs text-stone-400 ml-1">({meal.rank}/5)</span>
       </div>
 
       <div className="flex gap-2">
         <button
           onClick={() => onEdit(meal)}
-          className="flex-1 px-3 py-1.5 bg-blue-50 text-blue-600 rounded hover:bg-blue-100 transition-colors text-sm font-medium"
+          className="flex-1 px-3 py-1.5 bg-amber-50 text-amber-700 rounded hover:bg-amber-100 transition-colors text-sm font-medium"
         >
           編集
         </button>

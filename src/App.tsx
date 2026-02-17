@@ -86,11 +86,11 @@ const App = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-stone-100">
       <div className="max-w-6xl mx-auto px-4 py-8">
         <header className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">🍽️ 献立記録アプリ</h1>
-          <p className="text-gray-600 mt-2">毎日の食事を記録しましょう</p>
+          <h1 className="text-3xl font-bold text-stone-700">🍽️ 献立記録アプリ</h1>
+          <p className="text-stone-500 mt-2">毎日の食事を記録しましょう</p>
         </header>
 
         <MealForm
@@ -101,7 +101,7 @@ const App = () => {
 
         {loading ? (
           <div className="text-center py-12">
-            <p className="text-gray-500">読み込み中...</p>
+            <p className="text-stone-400">読み込み中...</p>
           </div>
         ) : error ? (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
