@@ -5,6 +5,7 @@ export type Meal = {
   meal_name: string
   meal_date: string
   meal_type: MealType
+  rank: number
   created_at?: string
 }
 
@@ -12,4 +13,5 @@ export type MealFormData = {
   meal_name: string
   meal_date: string
   meal_type: MealType
+  rank: number
 }

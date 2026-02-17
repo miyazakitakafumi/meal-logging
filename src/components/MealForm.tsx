@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import type { Meal, MealType } from '../types'
 
 type MealFormProps = {
-  onSubmit: (data: { meal_name: string; meal_date: string; meal_type: MealType }) => void
+  onSubmit: (data: { meal_name: string; meal_date: string; meal_type: MealType; rank: number }) => void
   editingMeal?: Meal | null
   onCancel?: () => void
 }
@@ -11,12 +11,14 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
   const [mealName, setMealName] = useState('')
   const [mealDate, setMealDate] = useState('')
   const [mealType, setMealType] = useState<MealType>('昼食')
+  const [rank, setRank] = useState<number>(3)
 
   useEffect(() => {
     if (editingMeal) {
       setMealName(editingMeal.meal_name)
       setMealDate(editingMeal.meal_date)
       setMealType(editingMeal.meal_type)
+      setRank(editingMeal.rank)
     } else {
       // 新規登録時は今日の日付を設定
       setMealDate(new Date().toISOString().split('T')[0])
@@ -31,6 +33,7 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
       meal_name: mealName.trim(),
       meal_date: mealDate,
       meal_type: mealType,
+      rank,
     })
 
     // フォームをリセット
@@ -38,6 +41,7 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
       setMealName('')
       setMealDate(new Date().toISOString().split('T')[0])
       setMealType('昼食')
+      setRank(3)
     }
   }
 
@@ -91,6 +95,25 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
             <option value="昼食">昼食</option>
             <option value="夕食">夕食</option>
           </select>
+        </div>
+
+        <div>
+          <label htmlFor="rank" className="block text-sm font-medium text-gray-700 mb-1">
+            評価 (1-5)
+          </label>
+          <div className="flex items-center gap-2">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <button
+                key={star}
+                type="button"
+                onClick={() => setRank(star)}
+                className="text-2xl transition-colors focus:outline-none"
+              >
+                {star <= rank ? '⭐' : '☆'}
+              </button>
+            ))}
+            <span className="text-sm text-gray-600 ml-2">({rank}/5)</span>
+          </div>
         </div>
 
         <div className="flex gap-2">
