@@ -1,68 +1,38 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState } from 'react'
 import type { Meal, MealFormData } from './types'
-import { createMealRepository } from './repositories/mealRepository'
+import { useRepository } from './contexts/RepositoryContext'
+import { useMeals } from './hooks/useMeals'
 import MealForm from './components/MealForm'
 import MealList from './components/MealList'
 
-const mealRepository = createMealRepository()
-
 const App = () => {
-  const [meals, setMeals] = useState<Meal[]>([])
+  const repository = useRepository()
+  const { meals, loading, error, addMeal, updateMeal, deleteMeal } = useMeals(repository)
   const [editingMeal, setEditingMeal] = useState<Meal | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
 
-  // 献立を取得
-  const fetchMeals = useCallback(async () => {
-    try {
-      setLoading(true)
-      setError(null)
-      const data = await mealRepository.findAll()
-      setMeals(data)
-    } catch (err) {
-      console.error('Error fetching meals:', err)
-      setError(err instanceof Error ? err.message : '献立の取得に失敗しました')
-    } finally {
-      setLoading(false)
-    }
-  }, [])
-
-  useEffect(() => {
-    fetchMeals()
-  }, [fetchMeals])
-
-  // 献立を追加
   const handleAddMeal = async (data: MealFormData) => {
     try {
-      await mealRepository.create(data)
-      await fetchMeals()
+      await addMeal(data)
     } catch (err) {
-      console.error('Error adding meal:', err)
       alert(err instanceof Error ? err.message : '献立の登録に失敗しました')
     }
   }
 
-  // 献立を更新
   const handleUpdateMeal = async (data: MealFormData) => {
     if (!editingMeal) return
 
     try {
-      await mealRepository.update(editingMeal.id, data)
-      await fetchMeals()
+      await updateMeal(editingMeal.id, data)
       setEditingMeal(null)
     } catch (err) {
-      console.error('Error updating meal:', err)
       alert(err instanceof Error ? err.message : '献立の更新に失敗しました')
     }
   }
 
-  // 献立を削除
   const handleDeleteMeal = async (id: string) => {
     try {
-      await mealRepository.delete(id)
-      await fetchMeals()
+      await deleteMeal(id)
     } catch (err) {
-      console.error('Error deleting meal:', err)
       alert(err instanceof Error ? err.message : '献立の削除に失敗しました')
     }
   }
