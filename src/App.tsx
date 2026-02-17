@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { supabase } from './lib/supabaseClient'
-import type { Meal, MealType } from './types'
+import type { Meal, MealFormData } from './types'
 import MealForm from './components/MealForm'
 import MealList from './components/MealList'
 
@@ -36,7 +36,7 @@ const App = () => {
   }, [fetchMeals])
 
   // 献立を追加
-  const handleAddMeal = async (data: { meal_name: string; meal_date: string; meal_type: MealType; rank: number }) => {
+  const handleAddMeal = async (data: MealFormData) => {
     try {
       const { error } = await supabase
         .from('meals')
@@ -51,7 +51,7 @@ const App = () => {
   }
 
   // 献立を更新
-  const handleUpdateMeal = async (data: { meal_name: string; meal_date: string; meal_type: MealType; rank: number }) => {
+  const handleUpdateMeal = async (data: MealFormData) => {
     if (!editingMeal) return
 
     try {
