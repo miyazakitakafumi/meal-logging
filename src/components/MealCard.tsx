@@ -37,15 +37,6 @@ const MealCard = ({ meal, onEdit, onDelete }: MealCardProps) => {
         })}
       </p>
 
-      <div className="flex items-center gap-1 mb-3">
-        {[1, 2, 3, 4, 5].map((star) => (
-          <span key={star} className="text-lg">
-            {star <= meal.rank ? '⭐' : '☆'}
-          </span>
-        ))}
-        <span className="text-xs text-stone-400 ml-1">({meal.rank}/5)</span>
-      </div>
-
       <div className="flex gap-2">
         <button
           onClick={() => onEdit(meal)}
