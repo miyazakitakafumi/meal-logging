@@ -11,14 +11,14 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
   const [mealName, setMealName] = useState('')
   const [mealDate, setMealDate] = useState('')
   const [mealType, setMealType] = useState<MealType>('昼食')
-  const [rank, setRank] = useState<number>(3)
+  const [isHallOfFame, setIsHallOfFame] = useState(false)
 
   useEffect(() => {
     if (editingMeal) {
       setMealName(editingMeal.meal_name)
       setMealDate(editingMeal.meal_date)
       setMealType(editingMeal.meal_type)
-      setRank(editingMeal.rank)
+      setIsHallOfFame(editingMeal.is_hall_of_fame)
     } else {
       // 新規登録時は今日の日付を設定
       setMealDate(new Date().toISOString().split('T')[0])
@@ -33,7 +33,7 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
       meal_name: mealName.trim(),
       meal_date: mealDate,
       meal_type: mealType,
-      rank,
+      is_hall_of_fame: isHallOfFame,
     })
 
     // フォームをリセット
@@ -41,7 +41,7 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
       setMealName('')
       setMealDate(new Date().toISOString().split('T')[0])
       setMealType('昼食')
-      setRank(3)
+      setIsHallOfFame(false)
     }
   }
 
@@ -97,23 +97,17 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
           </select>
         </div>
 
-        <div>
-          <label htmlFor="rank" className="block text-sm font-medium text-stone-600 mb-1">
-            評価 (1-5)
+        <div className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            id="isHallOfFame"
+            checked={isHallOfFame}
+            onChange={(e) => setIsHallOfFame(e.target.checked)}
+            className="h-4 w-4 rounded border-stone-300 text-amber-600 focus:ring-amber-400"
+          />
+          <label htmlFor="isHallOfFame" className="text-sm font-medium text-stone-600">
+            殿堂入りにする
           </label>
-          <div className="flex items-center gap-2">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <button
-                key={star}
-                type="button"
-                onClick={() => setRank(star)}
-                className="text-2xl transition-colors focus:outline-none"
-              >
-                {star <= rank ? '⭐' : '☆'}
-              </button>
-            ))}
-            <span className="text-sm text-stone-500 ml-2">({rank}/5)</span>
-          </div>
         </div>
 
         <div className="flex gap-2">
