@@ -11,7 +11,6 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
   const [mealName, setMealName] = useState('')
   const [mealDate, setMealDate] = useState('')
   const [mealType, setMealType] = useState<MealType>('昼食')
-  const [rank, setRank] = useState<number>(3)
   const [isHallOfFame, setIsHallOfFame] = useState(false)
 
   useEffect(() => {
@@ -19,7 +18,6 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
       setMealName(editingMeal.meal_name)
       setMealDate(editingMeal.meal_date)
       setMealType(editingMeal.meal_type)
-      setRank(editingMeal.rank)
       setIsHallOfFame(editingMeal.isHallOfFame)
     } else {
       // 新規登録時は今日の日付を設定
@@ -35,7 +33,6 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
       meal_name: mealName.trim(),
       meal_date: mealDate,
       meal_type: mealType,
-      rank,
       isHallOfFame,
     })
 
@@ -44,7 +41,6 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
       setMealName('')
       setMealDate(new Date().toISOString().split('T')[0])
       setMealType('昼食')
-      setRank(3)
       setIsHallOfFame(false)
     }
   }
