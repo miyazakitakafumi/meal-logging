@@ -18,7 +18,7 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
       setMealName(editingMeal.meal_name)
       setMealDate(editingMeal.meal_date)
       setMealType(editingMeal.meal_type)
-      setIsHallOfFame(editingMeal.isHallOfFame)
+      setIsHallOfFame(editingMeal.is_hall_of_fame)
     } else {
       // 新規登録時は今日の日付を設定
       setMealDate(new Date().toISOString().split('T')[0])
@@ -33,7 +33,7 @@ const MealForm = ({ onSubmit, editingMeal, onCancel }: MealFormProps) => {
       meal_name: mealName.trim(),
       meal_date: mealDate,
       meal_type: mealType,
-      isHallOfFame,
+      is_hall_of_fame: isHallOfFame,
     })
 
     // フォームをリセット
