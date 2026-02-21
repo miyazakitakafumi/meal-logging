@@ -25,10 +25,8 @@ const MealCard = ({ meal, onEdit, onDelete }: MealCardProps) => {
       <div className="flex justify-between items-start mb-2">
         <div className="flex items-center gap-2">
           <h3 className="text-lg font-semibold text-stone-700">{meal.meal_name}</h3>
-          {meal.isHallOfFame && (
-            <span className="px-2 py-0.5 rounded text-xs font-semibold bg-amber-100 text-amber-800">
-              殿堂入り
-            </span>
+          {meal.is_hall_of_fame && (
+            <span className="text-lg" aria-label="殿堂入り">⭐</span>
           )}
         </div>
         <span className={`px-2 py-1 rounded text-xs font-medium ${getMealTypeColor(meal.meal_type)}`}>
