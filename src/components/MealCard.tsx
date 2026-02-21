@@ -23,7 +23,14 @@ const MealCard = ({ meal, onEdit, onDelete }: MealCardProps) => {
   return (
     <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-stone-200">
       <div className="flex justify-between items-start mb-2">
-        <h3 className="text-lg font-semibold text-stone-700">{meal.meal_name}</h3>
+        <div className="flex items-center gap-2">
+          <h3 className="text-lg font-semibold text-stone-700">{meal.meal_name}</h3>
+          {meal.isHallOfFame && (
+            <span className="px-2 py-0.5 rounded text-xs font-semibold bg-amber-100 text-amber-800">
+              殿堂入り
+            </span>
+          )}
+        </div>
         <span className={`px-2 py-1 rounded text-xs font-medium ${getMealTypeColor(meal.meal_type)}`}>
           {meal.meal_type}
         </span>
@@ -36,15 +43,6 @@ const MealCard = ({ meal, onEdit, onDelete }: MealCardProps) => {
           day: 'numeric',
         })}
       </p>
-
-      <div className="flex items-center gap-1 mb-3">
-        {[1, 2, 3, 4, 5].map((star) => (
-          <span key={star} className="text-lg">
-            {star <= meal.rank ? '⭐' : '☆'}
-          </span>
-        ))}
-        <span className="text-xs text-stone-400 ml-1">({meal.rank}/5)</span>
-      </div>
 
       <div className="flex gap-2">
         <button
